@@ -6,18 +6,18 @@ import org.scribe.model.Token;
 import org.scribe.model.Verb;
 import org.scribe.oauth.OAuthService;
 
-import com.sun.xml.internal.ws.developer.MemberSubmissionEndpointReference.Elements;
-import com.svgn.xero.domain.ApiException;
 import com.svgn.xero.domain.ApiExceptionExtended;
 import com.svgn.xero.domain.ArrayOfInvoice;
 import com.svgn.xero.domain.ResponseType;
+import com.svgn.xero.exception.ResourceNotFoundException;
+import com.svgn.xero.exception.XeroException;
 import com.svgn.xero.util.XeroRequestType;
 import com.svgn.xero.util.XeroXmlManager;
 
 public class XeroInterface {
 	
 	
-	public static void postInvoices(OAuthService service, Token accessToken, ArrayOfInvoice arrayOfInvoice){
+	public static void postInvoices(OAuthService service, Token accessToken, ArrayOfInvoice arrayOfInvoice) throws XeroException{
 		OAuthRequest request = new OAuthRequest(Verb.POST, XeroRequestType.INVOICE.getURL());
 		
 		request.addBodyParameter("xml", XeroXmlManager.invoicesToXml(arrayOfInvoice));
@@ -26,17 +26,23 @@ public class XeroInterface {
 		System.out.println(response.getBody());
 		if (response.getBody().startsWith("<ApiException")){
 			ApiExceptionExtended exception = XeroXmlManager.xmlToException(response.getBody());
-			System.out.println(exception.getType());
-			System.out.println(exception.getMessage());
-			System.out.println(exception.getErrorNumber());
-			ApiExceptionExtended.Elements elements = exception.getElements();
-			System.out.println(elements.getDataContractBase());
-			
-			
+			XeroException ex = new XeroException(response.getBody(),exception);
+			throw ex;
 		}else{
 		ResponseType res = XeroXmlManager.xmlToResponse(response.getBody());
 		System.out.println(res.getStatus());
 		System.out.println(res.getProviderName());
 		}
+	}
+	
+	public static ArrayOfInvoice getInvoiceById(OAuthService service, Token accessToken, String invoiceId) throws ResourceNotFoundException{
+		OAuthRequest request = new OAuthRequest(Verb.GET, XeroRequestType.INVOICE.getURL()+"/"+invoiceId);
+		service.signRequest(accessToken, request);
+		Response response = request.send();
+		if (response.getBody().indexOf("cannot be found")!=-1){
+			throw new ResourceNotFoundException(response.getBody());
+		}
+		ResponseType resp = XeroXmlManager.xmlToResponse(response.getBody());
+		return resp.getInvoices();
 	}
 }
