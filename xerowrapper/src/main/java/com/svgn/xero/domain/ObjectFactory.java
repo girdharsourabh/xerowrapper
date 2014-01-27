@@ -18,7 +18,7 @@ import javax.xml.namespace.QName;
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
  * generated in the com.svgn.xero.domain package. 
- * <p>An ObjectFactory allows you to programatically 
+ * <p>An XeroObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
  * content can consist of schema derived interfaces 
@@ -31,32 +31,32 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _Accounts_QNAME = new QName("", "Accounts");
-    private final static QName _Items_QNAME = new QName("", "Items");
-    private final static QName _Users_QNAME = new QName("", "Users");
-    private final static QName _BankTransactions_QNAME = new QName("", "BankTransactions");
-    private final static QName _TrackingCategories_QNAME = new QName("", "TrackingCategories");
-    private final static QName _Response_QNAME = new QName("", "Response");
-    private final static QName _BrandingThemes_QNAME = new QName("", "BrandingThemes");
-    private final static QName _Employees_QNAME = new QName("", "Employees");
-    private final static QName _Setup_QNAME = new QName("", "Setup");
-    private final static QName _TaxRates_QNAME = new QName("", "TaxRates");
-    private final static QName _Attachments_QNAME = new QName("", "Attachments");
-    private final static QName _Payments_QNAME = new QName("", "Payments");
-    private final static QName _Payment_QNAME = new QName("", "Payment");
-    private final static QName _Manualjournals_QNAME = new QName("", "Manualjournals");
-    private final static QName _Currencies_QNAME = new QName("", "Currencies");
-    private final static QName _CreditNotes_QNAME = new QName("", "CreditNotes");
-    private final static QName _Invoices_QNAME = new QName("", "Invoices");
-    private final static QName _Organisations_QNAME = new QName("", "Organisations");
-    private final static QName _Contacts_QNAME = new QName("", "Contacts");
-    private final static QName _Journals_QNAME = new QName("", "Journals");
-    private final static QName _ExpenseClaims_QNAME = new QName("", "ExpenseClaims");
-    private final static QName _LineItems_QNAME = new QName("", "LineItems");
-    private final static QName _Receipts_QNAME = new QName("", "Receipts");
+    protected final static QName _Accounts_QNAME = new QName("", "Accounts");
+    protected final static QName _Items_QNAME = new QName("", "Items");
+    protected final static QName _Users_QNAME = new QName("", "Users");
+    protected final static QName _BankTransactions_QNAME = new QName("", "BankTransactions");
+    protected final static QName _TrackingCategories_QNAME = new QName("", "TrackingCategories");
+    protected final static QName _Response_QNAME = new QName("", "Response");
+    protected final static QName _BrandingThemes_QNAME = new QName("", "BrandingThemes");
+    protected final static QName _Employees_QNAME = new QName("", "Employees");
+    protected final static QName _Setup_QNAME = new QName("", "Setup");
+    protected final static QName _TaxRates_QNAME = new QName("", "TaxRates");
+    protected final static QName _Attachments_QNAME = new QName("", "Attachments");
+    protected final static QName _Payments_QNAME = new QName("", "Payments");
+    protected final static QName _Payment_QNAME = new QName("", "Payment");
+    protected final static QName _Manualjournals_QNAME = new QName("", "Manualjournals");
+    protected final static QName _Currencies_QNAME = new QName("", "Currencies");
+    protected final static QName _CreditNotes_QNAME = new QName("", "CreditNotes");
+    protected final static QName _Invoices_QNAME = new QName("", "Invoices");
+    protected final static QName _Organisations_QNAME = new QName("", "Organisations");
+    protected final static QName _Contacts_QNAME = new QName("", "Contacts");
+    protected final static QName _Journals_QNAME = new QName("", "Journals");
+    protected final static QName _ExpenseClaims_QNAME = new QName("", "ExpenseClaims");
+    protected final static QName _LineItems_QNAME = new QName("", "LineItems");
+    protected final static QName _Receipts_QNAME = new QName("", "Receipts");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.svgn.xero.domain
+     * Create a new XeroObjectFactory that can be used to create new instances of schema derived classes for package: com.svgn.xero.domain
      * 
      */
     public ObjectFactory() {

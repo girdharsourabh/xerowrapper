@@ -34,6 +34,7 @@ import com.svgn.xero.domain.ArrayOfInvoice;
 import com.svgn.xero.domain.ArrayOfPayment;
 import com.svgn.xero.domain.ObjectFactory;
 import com.svgn.xero.domain.ResponseType;
+import com.svgn.xero.domain.extended.XeroObjectFactory;
 
 /**
  *
@@ -134,6 +135,30 @@ public class XeroXmlManager {
 
         return contactsString;
     }
+    
+    public static<T> String arrayToXml(T arrayOfObjects) {
+
+        String contactsString = null;
+
+        try {
+
+            JAXBContext context = JAXBContext.newInstance(ResponseType.class);
+            Marshaller marshaller = context.createMarshaller();
+            //marshaller.setProperty("com.sun.xml.bind.xmlDeclaration", Boolean.FALSE);
+
+            XeroObjectFactory factory = new XeroObjectFactory();
+            JAXBElement<T> element = factory.createObjects(arrayOfObjects);
+
+            StringWriter stringWriter = new StringWriter();
+            marshaller.marshal(element, stringWriter);
+            contactsString = stringWriter.toString();
+
+        } catch (JAXBException ex) {
+            ex.printStackTrace();
+        }
+
+        return contactsString;
+    }
 
     public static String invoicesToXml(ArrayOfInvoice arrayOfInvoices) {
 
@@ -182,4 +207,6 @@ public class XeroXmlManager {
 
         return paymentsString;
     }
+
+	
 }
