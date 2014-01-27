@@ -116,6 +116,13 @@ public class XeroObjectFactory extends ObjectFactory{
     private static Map qNameMap = new HashMap();
     static{
     	qNameMap.put(ArrayOfInvoice.class, _Invoices_QNAME);
+    	qNameMap.put(ArrayOfPayment.class, _Payments_QNAME);
+    	qNameMap.put(ArrayOfUser.class, _Users_QNAME);
+    	qNameMap.put(ArrayOfOrganisation.class, _Organisations_QNAME);
+    	qNameMap.put(ArrayOfItem.class, _Items_QNAME);
+    	qNameMap.put(ArrayOfContact.class, _Contacts_QNAME);
+    	qNameMap.put(ArrayOfAccount.class, _Accounts_QNAME);
+    	
     }
     
     /**
