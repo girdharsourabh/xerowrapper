@@ -20,6 +20,7 @@ import com.svgn.xero.domain.ResponseType;
 import com.svgn.xero.exception.RequestInvalidException;
 import com.svgn.xero.exception.ResourceNotFoundException;
 import com.svgn.xero.exception.XeroException;
+import com.svgn.xero.search.SearchCriteria;
 import com.svgn.xero.util.DateUtils;
 import com.svgn.xero.util.XeroRequestType;
 import com.svgn.xero.util.XeroXmlManager;
@@ -79,6 +80,18 @@ public class XeroInterface<T> {
 	public T getById(OAuthService service,
 			Token accessToken, XeroRequestType requestType, String id) throws ResourceNotFoundException{
 		OAuthRequest request = new OAuthRequest(Verb.GET, requestType.getURL()+"/"+id);
+		service.signRequest(accessToken, request);
+		Response response = request.send();
+		if (response.getBody().indexOf("cannot be found")!=-1){
+			throw new ResourceNotFoundException(response.getBody());
+		}
+		ResponseType resp = XeroXmlManager.xmlToResponse(response.getBody());
+		return extractObjects(resp,requestType);
+	}
+	
+	public T getByCriteria(OAuthService service,
+			Token accessToken, XeroRequestType requestType, SearchCriteria criteria) throws ResourceNotFoundException{
+		OAuthRequest request = new OAuthRequest(Verb.GET, requestType.getURL());
 		service.signRequest(accessToken, request);
 		Response response = request.send();
 		if (response.getBody().indexOf("cannot be found")!=-1){
